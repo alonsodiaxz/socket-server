@@ -40,43 +40,17 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous""></script>
     <script> 
+
     //Socket del cliente
-    //Probar en localhost --> const socket = io('http://localhost:8080');
-    const socket = io('https://react-socket-io-server.herokuapp.com/');
-    //Referencias al html
-    const formulario = document.querySelector('#miFormulario');
-    const mensajes = document.querySelector('#misMensajes');
-    const txt = document.querySelector('#txtMensaje');
+    const socket = io('http://localhost:8080');
 
-    formulario.addEventListener( 'submit', (ev) => {
-        ev.preventDefault();
-        const nuevoMensaje = txt.value;
-        console.log(nuevoMensaje);
-        socket.emit('mensaje-to-server', {
-            texto: nuevoMensaje,
-        });
+
+    socket.on('current-bands',(bands) =>{
+        console.log(bands.name);
+        //mensajes.innerHTML += `<li>${data}</li>`;
     });
 
-    socket.on('mensaje-from-server',(data) =>{
-        //console.log(data);
-        mensajes.innerHTML += `<li>${data}</li>`;
-    });
-
-    /*
-    //De esta manera estoy escuchando los mensajes que se emiten desde el lado del servidor.
-    socket.on('mensaje-bienvenida', (data) => {
-        console.log(data);
-    });
-
-    
-    setTimeout(() => {
-
-        //Emitir un evento con cabecera 'Mensaje' una vez hayan transcurrido 2 segundos.
-        socket.emit('Mensaje', {
-            msg: 'cliente',
-            nombre: 'Alonso'
-        });  
-    }, 2000);*/
+  
     </script>
 </body>
 </html>
